@@ -11,7 +11,8 @@ import {
     genresLoaded: false,
     genres: [],
   };
-  
+  const BASE_URL= process.env.BASE_URL;
+
   export const getGenres = createAsyncThunk("netflix/genres", async () => {
     const {
       data: { genres },
@@ -81,7 +82,7 @@ import {
     async (email) => {
       const {
         data: { movies },
-      } = await axios.get(`http://localhost:5000/api/user/liked/${email}`);
+      } = await axios.get(`${BASE_URL}/api/user/liked/${email}`);
       return movies;
     }
   );    
@@ -91,7 +92,7 @@ import {
     async ({ movieId, email }) => {
       const {
         data: { movies },
-      } = await axios.put("http://localhost:5000/api/user/remove", {
+      } = await axios.put(`${BASE_URL}/api/user/remove`, {
         email,
         movieId,
       });

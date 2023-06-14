@@ -14,6 +14,7 @@ import { removeMovieFromLiked } from "../store";
 import video from "../assets/video.mp4";
 
 export default React.memo(function Card({ index, movieData, isLiked = false }) {
+  const BASE_URL= process.env.BASE_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
@@ -27,7 +28,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
 
   const addToList = async () => {
     try {
-      await axios.post("http://localhost:5000/api/user/add", {
+      await axios.post(`${BASE_URL}/api/user/add`, {
         email,
         data: movieData,
       });
